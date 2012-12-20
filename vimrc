@@ -42,7 +42,7 @@ set undofile " Set undo
 function! InitializeDirectories()
     "let parent=$HOME
     let parent="/tmp"
-    let prefix='.vim'
+    let prefix='.vim.$UID'
     let dir_list={
                 \ 'backup': 'backupdir',
                 \ 'view': 'viewdir',
@@ -168,13 +168,6 @@ set colorcolumn=+1 " Indicate text border
 set linebreak " Wrap long lines at a blank
 set showbreak=↪  " Change wrap line break
 set fillchars=diff:⣿,vert:│ " Change fillchars
-
-" Only show trailing whitespace when not in insert mode
-augroup trailing
-    autocmd!
-    autocmd InsertEnter * :set listchars-=trail:⌴
-    autocmd InsertLeave * :set listchars+=trail:⌴
-augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -312,10 +305,6 @@ autocmd BufRead *.tex set tw=76
 augroup prog
     au!
     au BufRead *.c,*.cc,*.cpp,*.h,*.java,*.sh set formatoptions=croql cindent nowrap nofoldenable
-    au BufEnter *.java      map <C-Return> :w\|:!javac %<CR>
-    au BufEnter *.c         map <C-Return> :w\|:!gcc %<CR>
-    au BufEnter *.cc,*.cpp  map <C-Return> :w\|:!g++ %<CR>
-    au BufLeave *.java,*.c,*.cc unmap <C-Return>
 
     " Don't expand tabs to spaces in Makefiles
     au BufEnter  [Mm]akefile*  set noet
@@ -522,7 +511,8 @@ if has("cscope")
         cs add $CSCOPE_DB
     endif
     set csverb
-"    set cscopetag
+    set cscopeverbose 
+
 
 	map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
 	map g<C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
