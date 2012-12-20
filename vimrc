@@ -116,11 +116,6 @@ Bundle 'vim-scripts/cscope.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'fholgado/minibufexpl.vim'
 
-" Local bundles if avaiable
-if filereadable(expand("~/.vimrc.bundles.local"))
-    source ~/.vimrc.bundles.local
-endif
-
 filetype plugin indent on " Required!
 
 "-------------------------------------------------
