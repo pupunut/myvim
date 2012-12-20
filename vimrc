@@ -111,10 +111,12 @@ Bundle 'w0ng/vim-hybrid'
 Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'nanotech/jellybeans.vim'
-"Bundle 'Lokaltog/vim-powerline'
-Bundle 'vim-scripts/cscope.vim'
-Bundle 'majutsushi/tagbar'
 Bundle 'fholgado/minibufexpl.vim'
+Bundle 'majutsushi/tagbar'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'vim-scripts/cscope.vim'
+Bundle 'scrooloose/nerdtree'
+"Bundle 'wesleyche / SrcExpl'
 
 filetype plugin indent on " Required!
 
@@ -167,7 +169,7 @@ set colorcolumn=+1 " Indicate text border
 "set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
 set linebreak " Wrap long lines at a blank
 set showbreak=↪  " Change wrap line break
-set fillchars=diff:⣿,vert:│ " Change fillchars
+"set fillchars=diff:⣿,vert:│ " Change fillchars
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -423,6 +425,7 @@ if has('gui_running')
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:Powerline_symbols = 'fancy'
 
 "--------------------------------------------------
 " => Tagbar
@@ -431,6 +434,13 @@ endif
 "--------------------------------------------------
 " => NERD_tree
 "--------------------------------------------------
+ nnoremap <Leader>d :NERDTreeToggle<CR>                                       
+ nnoremap <Leader>f :NERDTreeFind<CR>                                             
+ let NERDTreeChDirMode=2                                                          
+ let NERDTreeShowBookmarks=1                                                      
+ let NERDTreeShowHidden=1                                                         
+ let NERDTreeShowLineNumbers=1                                                    
+ let NERDTreeDirArrows=1              
 
 "--------------------------------------------------
 " => NERD_commenter
@@ -516,6 +526,12 @@ if has("cscope")
 
 	map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
 	map g<C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
+
+    set cscopequickfix=c-,d-,e-,g-,i-,s-,t-
+
+    nmap <C-n> :cnext<CR>
+    nmap <C-p> :cprev<CR> 
+    nmap <C-t> :colder<CR>:cc<CR>
 endif
 
 " MiniBufExpl Colors
@@ -526,9 +542,14 @@ hi MBEVisibleNormal guifg=#5DC2D6 guibg=fg
 hi MBEChanged guifg=#CD5907 guibg=fg
 hi MBENormal guifg=#808080 guibg=fg
 
+let g:miniBufExplModSelTarget = 1
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
+
+for buffer_no in range(1, 9)
+      execute "nmap <Leader>" . buffer_no . " :b" . buffer_no . "\<CR>"
+endfor
 
 " Modeline {{{
 " " vim:set ts=4:
