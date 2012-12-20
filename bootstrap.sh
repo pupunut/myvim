@@ -25,9 +25,9 @@ printf '\033[0;34m%s\033[0m\n' "Backing up current vim config..."
 for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc; do [ -e $i ] && mv -f $i $i.backup; done
 
 # install myvim
-printf '\033[0;34m%s\033[0m\n' "Cloning myvim..."
-rm -rf $HOME/myvim
-git clone git://github.com/pupunut/myvim.git $HOME/myvim
+#printf '\033[0;34m%s\033[0m\n' "Cloning myvim..."
+#rm -rf $HOME/myvim
+#git clone git://github.com/pupunut/myvim.git $HOME/myvim
 ln -s $HOME/myvim/vimrc $HOME/.vimrc
 
 printf '\033[0;34m%s\033[0m\n' "Installing Vundle..."
